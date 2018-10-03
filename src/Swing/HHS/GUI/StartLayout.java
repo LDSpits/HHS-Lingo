@@ -50,12 +50,9 @@ public class StartLayout implements ILayout {
 		btnStart.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("event fired!");
+				System.out.println("start button has been pressed");
 				
 				window.renderLayout(new TeamLayout());
-				
-				
-				
 			}
 		});
 		
