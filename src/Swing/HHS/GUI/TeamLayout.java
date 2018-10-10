@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.charset.CharacterCodingException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +23,12 @@ import javax.swing.border.EmptyBorder;
 
 public class TeamLayout implements ILayout {
 
+	private MainWindow window;
+	
+	public TeamLayout(MainWindow window) {
+		this.window = window;
+	}
+	
 	@Override
 	public JPanel render() {
 		JPanel contentPane = new JPanel();
@@ -50,25 +57,33 @@ public class TeamLayout implements ILayout {
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Button has been clicked!");
+				String input = textField.getText().toUpperCase();
+				
+				System.out.println("Ok pressed");
+				
+				if(input.length() != 5) {
+					// TODO: Give an error message
+					return;
+				}
+				
+				JPanel entry = new JPanel();
+				for (char character : input.toCharArray()) {
+					entry.add(new CharacterPanel(character));
+				}
+				
+				lingoCardPanel.add(entry);
+				
+				System.out.println("Repainting");
+				
+				// Update the view
+				window.redraw();
+				
 			}
 		});
 		lingoInputPanel.add(btnOk);
 		
 		JPanel lingoEntryPanel = new JPanel();
 		lingoCardPanel.add(lingoEntryPanel);
-		
-		// CharacterPanels are containers for individual characters 
-		CharacterPanel characterPanel = new CharacterPanel('A');
-		lingoEntryPanel.add(characterPanel);
-		CharacterPanel characterPanel_1 = new CharacterPanel('P');
-		lingoEntryPanel.add(characterPanel_1);
-		CharacterPanel characterPanel_2 = new CharacterPanel('P');
-		lingoEntryPanel.add(characterPanel_2);
-		CharacterPanel characterPanel_3 = new CharacterPanel('E');
-		lingoEntryPanel.add(characterPanel_3);
-		CharacterPanel characterPanel_4 = new CharacterPanel('L');
-		lingoEntryPanel.add(characterPanel_4);
 		
 		JLabel label = new JLabel("New label");
 		contentPane.add(label, BorderLayout.NORTH);

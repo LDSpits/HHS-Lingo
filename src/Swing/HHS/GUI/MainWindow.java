@@ -59,4 +59,9 @@ public class MainWindow extends JFrame {
 		revalidate();
 		repaint();
 	}
+	
+	public void redraw() {
+		revalidate();
+		repaint();
+	}
 }
