@@ -21,11 +21,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class TeamLayout implements ILayout {
+public class LingoGameLayout implements ILayout {
 
 	private MainWindow window;
 	
-	public TeamLayout(MainWindow window) {
+	private String answer = new AnswerProvider()
+			.GetRandomAnswer()
+			.toUpperCase();
+	
+	public LingoGameLayout(MainWindow window) {
 		this.window = window;
 	}
 	
@@ -57,21 +61,10 @@ public class TeamLayout implements ILayout {
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String input = textField.getText().toUpperCase();
-				
 				System.out.println("Ok pressed");
 				
-				if(input.length() != 5) {
-					// TODO: Give an error message
-					return;
-				}
-				
-				JPanel entry = new JPanel();
-				for (char character : input.toCharArray()) {
-					entry.add(new CharacterPanel(character));
-				}
-				
-				lingoCardPanel.add(entry);
+				// Add the attempt to the screen 
+				lingoCardPanel.add(ValidateAnswer(textField.getText().toUpperCase()));
 				
 				System.out.println("Repainting");
 				
@@ -92,6 +85,37 @@ public class TeamLayout implements ILayout {
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		
 		return contentPane;
+	}
+	
+	private JPanel ValidateAnswer(String attempt) {
+		
+		// Create a panel that will hold the attempt
+		JPanel entry = new JPanel();
+		
+		// Check if the answer length equals the length of the attempt
+		if(answer.length() == attempt.length()) {
+			// Valid attempt
+			
+			for (int i = 0; i < attempt.length(); i++) {
+				char answerChar = answer.toCharArray()[i];
+				char attemptChar = attempt.toCharArray()[i];
+				
+				CharacterPanel panel = new CharacterPanel(attemptChar);
+				
+				if(attemptChar == answerChar)
+					panel.IsCorrectPosition();
+				
+				entry.add(panel);
+			}
+		} else {
+			// Create an invalid answer with the same amount of panels as the amount of characters
+			for(int i = 0; i < answer.length(); i++) {
+				entry.add(new CharacterPanel('-'));
+			}
+		}
+		
+		return entry;
+		
 	}
 
 }

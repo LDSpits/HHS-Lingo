@@ -31,4 +31,12 @@ public class CharacterPanel extends JPanel{
 		// Add the label to the panel
 		add(character);
 	}
+	
+	public void IsInvalidLocation() {
+		this.setBackground(ProgramStyle.CHARACTER_INVALID_POSITION_COLOR);
+	}
+	
+	public void IsCorrectPosition() {
+		this.setBackground(ProgramStyle.CHARACTER_CORRECT_POSITION_COLOR);
+	}
 }

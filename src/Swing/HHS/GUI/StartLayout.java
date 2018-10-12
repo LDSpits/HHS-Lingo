@@ -52,7 +52,7 @@ public class StartLayout implements ILayout {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("start button has been pressed");
 				
-				window.renderLayout(new TeamLayout(window));
+				window.renderLayout(new LingoGameLayout(window));
 			}
 		});
 		
