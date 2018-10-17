@@ -1,5 +1,7 @@
 package Swing.HHS.GUI;
 
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 public class AnswerPanel extends JPanel {
@@ -19,6 +21,8 @@ public class AnswerPanel extends JPanel {
 			add(panels[i]);
 		}
 		
+		ArrayList<CharacterPanel> yellowPanels = new ArrayList<CharacterPanel>();
+		
 		// Orange panels check
 		for (int i = 0; i < panels.length; i++) {
 			CharacterPanel panel = panels[i];
@@ -26,12 +30,14 @@ public class AnswerPanel extends JPanel {
 			if (panel.getCharacter() == answerArray[i]) {
 				panel.IsCorrectPosition();
 				answerArray[i] = '*';
+			} else {
+				yellowPanels.add(panel);
 			}
 		}
 		
 		// yellow panels
-		for (int i = 0; i < panels.length; i++) {
-			CharacterPanel panel = panels[i];
+		for (int i = 0; i < yellowPanels.size(); i++) {
+			CharacterPanel panel = yellowPanels.get(i);
 			
 			if(String.valueOf(answerArray).contains(Character.toString(panel.getCharacter()))) {
 				panel.IsInvalidLocation();
