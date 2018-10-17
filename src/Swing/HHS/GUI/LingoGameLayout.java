@@ -64,7 +64,7 @@ public class LingoGameLayout implements ILayout {
 				System.out.println("Ok pressed");
 				
 				// Add the attempt to the screen 
-				lingoCardPanel.add(ValidateAnswer(textField.getText().toUpperCase()));
+				lingoCardPanel.add(new AnswerPanel(answer, textField.getText().toUpperCase()));
 				
 				System.out.println("Repainting");
 				

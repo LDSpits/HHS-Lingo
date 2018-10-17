@@ -12,7 +12,8 @@ import javax.swing.SwingConstants;
 
 public class CharacterPanel extends JPanel{
 	
-	private JLabel character;
+	private JLabel characterLabel;
+	private char character;
 	
 	public CharacterPanel(char Character) {
 		// Default size of panel is 80 pixels width & height
@@ -21,15 +22,21 @@ public class CharacterPanel extends JPanel{
 		// Use the BorderLayout to be able to center the text
 		setLayout(new BorderLayout(0, 0));
 		
+		character = Character;
+		
 		// Create JLabel with the letter as text
-		character = new JLabel(String.valueOf(Character));
-		character.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		character.setAlignmentX(Component.CENTER_ALIGNMENT);
-		character.setHorizontalTextPosition(SwingConstants.CENTER);
-		character.setHorizontalAlignment(SwingConstants.CENTER);
+		characterLabel = new JLabel(String.valueOf(Character));
+		characterLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		characterLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		characterLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		characterLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		// Add the label to the panel
-		add(character);
+		add(characterLabel);
+	}
+	
+	public char getCharacter() {
+		return character;
 	}
 	
 	public void IsInvalidLocation() {
