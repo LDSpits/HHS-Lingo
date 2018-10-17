@@ -8,31 +8,40 @@ public class AnswerPanel extends JPanel {
 		if(answer.length() != attempt.length()) {
 			// this is an invalid answer, length does not match the answer length
 			IsInvalid(answer.length());
+			return;
 		}
 		
+		CharacterPanel[] panels = new CharacterPanel[answer.length()];
 		char[] answerArray = answer.toCharArray();
 		
-		for (int i = 0; i < attempt.length(); i++) {
-			char answerChar = answerArray[i];
-			char attemptChar = attempt.toCharArray()[i];
+		for (int i = 0; i < panels.length; i++) {
+			panels[i] = new CharacterPanel(attempt.toCharArray()[i]);
+			add(panels[i]);
+		}
+		
+		// Orange panels check
+		for (int i = 0; i < panels.length; i++) {
+			CharacterPanel panel = panels[i];
 			
-			CharacterPanel panel = new CharacterPanel(attemptChar);
-			
-			if(attemptChar == answerChar) {
+			if (panel.getCharacter() == answerArray[i]) {
 				panel.IsCorrectPosition();
-				// "Consume" the character by replacing it with an invalid character
 				answerArray[i] = '*';
-			} else if(String.valueOf(answerArray).contains(Character.toString(attemptChar))) {
+			}
+		}
+		
+		// yellow panels
+		for (int i = 0; i < panels.length; i++) {
+			CharacterPanel panel = panels[i];
+			
+			if(String.valueOf(answerArray).contains(Character.toString(panel.getCharacter()))) {
 				panel.IsInvalidLocation();
 				
-				// Find the position of the correct character
 				int position = String.valueOf(answerArray)
-					.lastIndexOf(Character.toString(attemptChar));
-				
-				answerArray[position] = '*';
+	                    .lastIndexOf(Character.toString(panel.getCharacter()));
+
+	            answerArray[position] = '*';
 			}
 			
-			add(panel);
 		}
 	}
 	
