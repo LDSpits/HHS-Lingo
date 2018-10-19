@@ -29,6 +29,8 @@ public class LingoGameLayout implements ILayout {
 			.GetRandomAnswer()
 			.toUpperCase();
 	
+	private int tryCount = 1;
+	
 	public LingoGameLayout(MainWindow window) {
 		this.window = window;
 	}
@@ -71,6 +73,12 @@ public class LingoGameLayout implements ILayout {
 				// Update the view
 				window.redraw();
 				
+				tryCount++;
+				
+				if(tryCount > 5) {
+					btnOk.setEnabled(false);
+					textField.setEnabled(false);
+				}
 			}
 		});
 		lingoInputPanel.add(btnOk);
