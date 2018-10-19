@@ -25,6 +25,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 
 public class DesignFrame extends JFrame {
 
@@ -96,8 +97,11 @@ public class DesignFrame extends JFrame {
 		CharacterPanel characterPanel_4 = new CharacterPanel('L');
 		lingoEntryPanel.add(characterPanel_4);
 		
-		JLabel label = new JLabel("New label");
-		getContentPane().add(label, BorderLayout.NORTH);
+		JLabel show_image = new JLabel("");
+		show_image.setHorizontalAlignment(SwingConstants.CENTER);
+		show_image.setIcon(new ImageIcon(DesignFrame.class.getResource("/Lingook.png")));
+		getContentPane().add(show_image, BorderLayout.NORTH);		
+		
 		
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.HORIZONTAL;

@@ -48,7 +48,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 928, 558);
+		setBounds(100, 100, 978, 678);
 		
 		// Render the initial start menu
 		renderLayout(new StartLayout(this));
