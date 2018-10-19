@@ -6,12 +6,17 @@ import javax.swing.JPanel;
 
 public class AnswerPanel extends JPanel {
 	
+	private boolean isCorrectAswer = false;
+	
 	public AnswerPanel(String answer, String attempt) {
 		if(answer.length() != attempt.length()) {
 			// this is an invalid answer, length does not match the answer length
 			IsInvalid(answer.length());
 			return;
 		}
+		
+		if(answer.contentEquals(attempt))
+			isCorrectAswer = true;
 		
 		CharacterPanel[] panels = new CharacterPanel[answer.length()];
 		char[] answerArray = answer.toCharArray();
@@ -49,6 +54,10 @@ public class AnswerPanel extends JPanel {
 			}
 			
 		}
+	}
+	
+	public boolean getIsAnswer() {
+		return isCorrectAswer;
 	}
 	
 	private void IsInvalid(int length) {

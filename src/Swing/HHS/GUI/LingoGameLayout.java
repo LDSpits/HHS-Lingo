@@ -60,15 +60,32 @@ public class LingoGameLayout implements ILayout {
 		lingoInputPanel.add(textField);
 		textField.setColumns(10);
 		
+		JLabel gameStatuslabel = new JLabel();
+		JButton btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				window.renderLayout(new LingoGameLayout(window));
+			}
+		});
+		btnReset.setVisible(false);
+		
+		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Ok pressed");
+				
+				// validate the answer
+				AnswerPanel panel = new AnswerPanel(answer, textField.getText().toUpperCase());
+				
+				if(panel.getIsAnswer()) {
+					gameStatuslabel.setText("Gewonnen!!");
+					btnOk.setEnabled(false);
+					textField.setEnabled(false);
+					btnReset.setVisible(true);
+				}
 				
 				// Add the attempt to the screen 
-				lingoCardPanel.add(new AnswerPanel(answer, textField.getText().toUpperCase()));
-				
-				System.out.println("Repainting");
+				lingoCardPanel.add(panel);
 				
 				// Update the view
 				window.redraw();
@@ -76,12 +93,16 @@ public class LingoGameLayout implements ILayout {
 				tryCount++;
 				
 				if(tryCount > 5) {
+					gameStatuslabel.setText("Verloren!!");
 					btnOk.setEnabled(false);
 					textField.setEnabled(false);
+					btnReset.setVisible(true);
 				}
 			}
 		});
 		lingoInputPanel.add(btnOk);
+		lingoInputPanel.add(gameStatuslabel);
+		lingoInputPanel.add(btnReset);
 		
 		JPanel lingoEntryPanel = new JPanel();
 		lingoCardPanel.add(lingoEntryPanel);
@@ -94,36 +115,4 @@ public class LingoGameLayout implements ILayout {
 		
 		return contentPane;
 	}
-	
-	private JPanel ValidateAnswer(String attempt) {
-		
-		// Create a panel that will hold the attempt
-		JPanel entry = new JPanel();
-		
-		// Check if the answer length equals the length of the attempt
-		if(answer.length() == attempt.length()) {
-			// Valid attempt
-			
-			for (int i = 0; i < attempt.length(); i++) {
-				char answerChar = answer.toCharArray()[i];
-				char attemptChar = attempt.toCharArray()[i];
-				
-				CharacterPanel panel = new CharacterPanel(attemptChar);
-				
-				if(attemptChar == answerChar)
-					panel.IsCorrectPosition();
-				
-				entry.add(panel);
-			}
-		} else {
-			// Create an invalid answer with the same amount of panels as the amount of characters
-			for(int i = 0; i < answer.length(); i++) {
-				entry.add(new CharacterPanel('-'));
-			}
-		}
-		
-		return entry;
-		
-	}
-
 }
