@@ -110,7 +110,7 @@ public class LingoGameLayout implements ILayout {
 		
 		JLabel show_image = new JLabel("");
 		show_image.setHorizontalAlignment(SwingConstants.CENTER);
-		show_image.setIcon(new ImageIcon(DesignFrame.class.getResource("/Lingook.png")));
+		show_image.setIcon(new ImageIcon(this.getClass().getResource("/resource/Lingook.png")));
 		contentPane.add(show_image, BorderLayout.NORTH);	
 		
 		GridBagConstraints constraints = new GridBagConstraints();
