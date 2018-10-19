@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.nio.charset.CharacterCodingException;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -78,8 +79,10 @@ public class LingoGameLayout implements ILayout {
 		JPanel lingoEntryPanel = new JPanel();
 		lingoCardPanel.add(lingoEntryPanel);
 		
-		JLabel label = new JLabel("New label");
-		contentPane.add(label, BorderLayout.NORTH);
+		JLabel show_image = new JLabel("");
+		show_image.setHorizontalAlignment(SwingConstants.CENTER);
+		show_image.setIcon(new ImageIcon(DesignFrame.class.getResource("/Lingook.png")));
+		contentPane.add(show_image, BorderLayout.NORTH);	
 		
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
