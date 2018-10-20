@@ -9,8 +9,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -30,10 +32,15 @@ public class StartLayout implements ILayout {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("Lingo");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel, BorderLayout.NORTH);
+		JLabel show_image = new JLabel("");
+		show_image.setHorizontalAlignment(SwingConstants.CENTER);
+		show_image.setIcon(new ImageIcon(this.getClass().getResource("/resource/Lingook.png")));
+		contentPane.add(show_image, BorderLayout.NORTH);
+		
+//		JLabel lblNewLabel = new JLabel("Lingo");
+//		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+//		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(ProgramStyle.BACKGROUND_COLOR);
@@ -64,6 +71,13 @@ public class StartLayout implements ILayout {
 		panel.add(btnStart, gbc_btnStart);
 		
 		JButton btnCredits = new JButton("Credits");
+		
+		btnCredits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				JOptionPane.showMessageDialog(window, "Created by:\r\nAmel Muhic: 18084214\r\nLucas Spits: 18006310", "Credits", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		
 		btnCredits.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnCredits.setAlignmentX(Component.CENTER_ALIGNMENT);
 		GridBagConstraints gbc_btnCredits = new GridBagConstraints();

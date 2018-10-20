@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 public class AnswerPanel extends JPanel {
 	
 	private boolean isCorrectAswer = false;
+	private boolean isIllegalAttempt = false;
 	
 	public AnswerPanel(String answer, String attempt) {
 		if(answer.length() != attempt.length()) {
