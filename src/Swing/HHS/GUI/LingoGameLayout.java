@@ -44,7 +44,7 @@ public class LingoGameLayout implements ILayout {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel boxLayoutContainer = new JPanel();
-		boxLayoutContainer.setBackground(Color.PINK);
+		boxLayoutContainer.setBackground(ProgramStyle.BACKGROUND_COLOR);
 		contentPane.add(boxLayoutContainer, BorderLayout.CENTER);
 		boxLayoutContainer.setLayout(new BoxLayout(boxLayoutContainer, BoxLayout.Y_AXIS));
 		
