@@ -57,6 +57,9 @@ public class LingoGameLayout implements ILayout {
 		JPanel lingoInputPanel = new JPanel();
 		lingoCardPanel.add(lingoInputPanel);
 		
+		JLabel lblTries = new JLabel("Try 1/5");
+		lingoInputPanel.add(lblTries);
+		
 		JTextField textField = new JTextField();
 		lingoInputPanel.add(textField);
 		textField.setColumns(10);
@@ -75,21 +78,24 @@ public class LingoGameLayout implements ILayout {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(tryCount <= 5) {
-					// validate the answer
-					AnswerPanel panel = new AnswerPanel(answer, textField.getText().toUpperCase());
+				// validate the answer
+				AnswerPanel panel = new AnswerPanel(answer, textField.getText().toUpperCase());
+				
+				// Add the attempt to the screen 
+				lingoCardPanel.add(panel);
+				
+				if(tryCount < 5) {
 					
 					if(panel.getIsAnswer()) {
 						gameStatuslabel.setText("Gewonnen!!");
 						btnOk.setEnabled(false);
 						textField.setEnabled(false);
 						btnReset.setVisible(true);
+						return;
 					}
 					
-					// Add the attempt to the screen 
-					lingoCardPanel.add(panel);
-					
 					tryCount++;
+					lblTries.setText("try " + tryCount + "/5");
 				} else {
 					// Game has ended with a loss
 					gameStatuslabel.setText("Verloren!!");
