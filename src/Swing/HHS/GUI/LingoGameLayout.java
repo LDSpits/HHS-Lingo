@@ -75,30 +75,31 @@ public class LingoGameLayout implements ILayout {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// validate the answer
-				AnswerPanel panel = new AnswerPanel(answer, textField.getText().toUpperCase());
-				
-				if(panel.getIsAnswer()) {
-					gameStatuslabel.setText("Gewonnen!!");
-					btnOk.setEnabled(false);
-					textField.setEnabled(false);
-					btnReset.setVisible(true);
-				}
-				
-				// Add the attempt to the screen 
-				lingoCardPanel.add(panel);
-				
-				// Update the view
-				window.redraw();
-				
-				tryCount++;
-				
-				if(tryCount > 5) {
+				if(tryCount <= 5) {
+					// validate the answer
+					AnswerPanel panel = new AnswerPanel(answer, textField.getText().toUpperCase());
+					
+					if(panel.getIsAnswer()) {
+						gameStatuslabel.setText("Gewonnen!!");
+						btnOk.setEnabled(false);
+						textField.setEnabled(false);
+						btnReset.setVisible(true);
+					}
+					
+					// Add the attempt to the screen 
+					lingoCardPanel.add(panel);
+					
+					tryCount++;
+				} else {
+					// Game has ended with a loss
 					gameStatuslabel.setText("Verloren!!");
 					btnOk.setEnabled(false);
 					textField.setEnabled(false);
 					btnReset.setVisible(true);
 				}
+				
+				// Update the view
+				window.redraw();
 			}
 		});
 		lingoInputPanel.add(btnOk);
